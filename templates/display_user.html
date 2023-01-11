@@ -11,16 +11,30 @@
 </head>
 
 <body class="bg-primary p-2">
-    <div class="bg-dark m-auto p-2 text-center text-light w-75 rounded border border-light">
-        <h2>Here is a list of all of our Users!</h2>
-        <hr />
-        {% for one_user in all_users %}
-        <p>First Name: {{one_user.first_name}}</p>
-        <p>Last Name: {{one_user.last_name}}</p>
-        <p>Email Address: {{one_user.email}}</p>
-        <hr />
-        {% endfor %}
-    </div>
+    <table class="table table-hover table-dark table-striped table-bordered border-light">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">First</th>
+                <th scope="col">Last</th>
+                <th scope="col">Email Address</th>
+                <th scope="col">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for one_user in all_users %}
+            <tr>
+                <td scope="row">{{ one_user.id }}</td>
+                <td>{{ one_user.first_name }}</td>
+                <td>{{ one_user.last_name }}</td>
+                <td>{{ one_user.email }}</td>
+                <td><a href="/">Create</a> | <a href="/display_user_by_id/{{one_user.id}}">Details</a> | <a
+                        href="/edit_user/{{one_user.id}}">Edit</a> | <a href="/delete_user/{{one_user.id}}">Delete</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
 </body>
 
 </html>

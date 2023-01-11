@@ -25,6 +25,33 @@ def display_user():
     print(users)
     return render_template('display_user.html', all_users=users)
 
+@app.route('/delete_user/<int:id>')
+def delete_user(id):
+    data={
+        'id':id
+    }
+    User.delete_user(data)
+    return redirect('/display_user')
+
+@app.route('/edit_user/<int:id>')
+def edit_user(id):
+    data={
+        'id':id
+    }
+    return render_template('edit_user.html', user=User.display_user_by_id(data))
+
+@app.route('/updated', methods=['POST'])
+def updated():
+    User.updated(request.form)
+    return redirect('/display_user')
+
+@app.route('/display_user_by_id/<int:id>')
+def display_user_by_id(id):
+    data={
+        'id':id
+    }
+    return render_template('display_user_by_id.html', user=User.display_user_by_id(data))
+
 
 if __name__ == "__main__":
     app.run(debug=True)
